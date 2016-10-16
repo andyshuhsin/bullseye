@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Bull's Eye</title>
+    <link href="./style.css" rel="stylesheet" />
+</head>
+<body>
+  <main>
+      <div class="graph"></div>
+      <div class="control">
+          <input class="guess"
+                 type="range"
+                 min="1"
+                 max="5"
+                 step="0.01"
+                 value="0"
+          />
+          <input class="confirm" type="submit" value="confirm" />
+      </div>
+      <div class="info"></div>
+      <input class="play-again"
+             type="submit"
+             value="Play again"
+             style="display: none"
+      />
+  </main>
+
+  <script src="./d3.v4.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
