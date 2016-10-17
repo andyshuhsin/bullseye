@@ -1,65 +1,57 @@
-const data = [
-    {
-        value: 1,
-        tag: "1",
-    },
-    {
-        value: 1 + Math.random() * 2,
-        tag: "?"
-    },
-]
+"use strict";
 
-const barSpacing = 20
-const barNumber = data.length
+var data = [{
+    value: 1,
+    tag: "1"
+}, {
+    value: 1 + Math.random() * 2,
+    tag: "?"
+}];
 
-const graphDom = document.querySelector(".graph")
-const graphDomWidth = graphDom.scrollWidth
-const barWidth = graphDomWidth / barNumber - barSpacing
+var barSpacing = 20;
+var barNumber = data.length;
 
-const graphHeight = 300
+var graphDom = document.querySelector(".graph");
+var graphDomWidth = graphDom.scrollWidth;
+var barWidth = graphDomWidth / barNumber - barSpacing;
 
-const barChart = d3.select(".graph")
-        .append("svg:svg")
-        .attr("width", graphDomWidth)
-        .attr("height", graphHeight)
+var graphHeight = 300;
 
-barChart.selectAll("rect")
-        .data(data).enter()
-        .append("svg:rect")
-        .attr("x", (_, index) => index * (barWidth + barSpacing))
-        .attr("y", datum => graphHeight - datum.value * 100)
-        .attr("height", datum => datum.value * 100)
-        .attr("width", barWidth)
-        .attr("fill", "#888")
+var barChart = d3.select(".graph").append("svg:svg").attr("width", graphDomWidth).attr("height", graphHeight);
 
-barChart.selectAll("text")
-        .data(data).enter()
-        .append("svg:text")
-        .attr("x", (_, index) => index * (barWidth + barSpacing))
-        .attr("y", datum => graphHeight - datum.value * 100)
-        .text(datum => datum.tag)
-        .attr("dx", barWidth/2)
-        .attr("dy", "2em")
-        .attr("fill", "white")
+barChart.selectAll("rect").data(data).enter().append("svg:rect").attr("x", function (_, index) {
+    return index * (barWidth + barSpacing);
+}).attr("y", function (datum) {
+    return graphHeight - datum.value * 100;
+}).attr("height", function (datum) {
+    return datum.value * 100;
+}).attr("width", barWidth).attr("fill", "#888");
 
-document.querySelector(".guess").onchange = event => {
-    data[1].tag = +event.target.value
-    const text = barChart.selectAll("text").data(data)
-    text.merge(text).text(d => d.tag)
-}
+barChart.selectAll("text").data(data).enter().append("svg:text").attr("x", function (_, index) {
+    return index * (barWidth + barSpacing);
+}).attr("y", function (datum) {
+    return graphHeight - datum.value * 100;
+}).text(function (datum) {
+    return datum.tag;
+}).attr("dx", barWidth / 2).attr("dy", "2em").attr("fill", "white");
 
-document.querySelector(".confirm").onclick = () => {
-    document.querySelector(".confirm").style.display = "none"
-    const infoDom = document.querySelector(".info")
-    const guess = document.querySelector(".guess").value
-    const truth = data[1].value
-    infoDom.innerHTML = `
-        Your guess: ${guess} <br />
-        True value: ${truth.toFixed(2)} <br />
-        You're off by ${((guess - truth) / truth * 100).toFixed(2)}%
-    `
-    document.querySelector('.play-again').style.display = 'block'
-}
+document.querySelector(".guess").onchange = function (event) {
+    data[1].tag = +event.target.value;
+    var text = barChart.selectAll("text").data(data);
+    text.merge(text).text(function (d) {
+        return d.tag;
+    });
+};
 
-document.querySelector('.play-again').onclick =
-        () => window.location.reload()
+document.querySelector(".confirm").onclick = function () {
+    document.querySelector(".confirm").style.display = "none";
+    var infoDom = document.querySelector(".info");
+    var guess = document.querySelector(".guess").value;
+    var truth = data[1].value;
+    infoDom.innerHTML = "\n        Your guess: " + guess + " <br />\n        True value: " + truth.toFixed(2) + " <br />\n        You're off by " + ((guess - truth) / truth * 100).toFixed(2) + "%\n    ";
+    document.querySelector('.play-again').style.display = 'block';
+};
+
+document.querySelector('.play-again').onclick = function () {
+    return window.location.reload();
+};
