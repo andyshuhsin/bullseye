@@ -17,3 +17,7 @@ gulp.task("build", ["copy", "compile:js"]);
 gulp.task("deploy", ["build"], () => {
     return gulp.src("./dist/**/*").pipe(ghPages());
 });
+
+gulp.task("watch", () => gulp.watch("src/**/*", ["build"]));
+
+gulp.task("default", ["watch"]);
