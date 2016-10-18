@@ -1,3 +1,7 @@
+localStorage.history = localStorage.history || "[]";
+
+const history = JSON.parse(localStorage.history);
+
 const data = [
     {
         value: 1,
@@ -51,7 +55,7 @@ document.querySelector(".guess").onchange = event => {
 document.querySelector(".confirm").onclick = () => {
     document.querySelector(".confirm").style.display = "none";
     const infoDom = document.querySelector(".info");
-    const guess = document.querySelector(".guess").value;
+    const guess = Number(document.querySelector(".guess").value);
     const truth = data[1].value;
     infoDom.innerHTML = `
         Your guess: ${guess} <br />
@@ -59,6 +63,14 @@ document.querySelector(".confirm").onclick = () => {
         You're off by ${((guess - truth) / truth * 100).toFixed(2)}%
     `;
     document.querySelector('.play-again').style.display = 'block';
+
+    history.push({
+        type: 'bar',
+        truth,
+        guess,
+        time: Date.now(),
+    });
+    localStorage.history = JSON.stringify(history)
 };
 
 document.querySelector('.play-again').onclick =
