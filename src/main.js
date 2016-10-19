@@ -3,7 +3,7 @@ localStorage.history = localStorage.history || "[]";
 const uiState = {
     scene: 'bar'
 };
-const history = JSON.parse(localStorage.history);
+const records = JSON.parse(localStorage.history);
 
 function renderBarScene() {
     const data = [
@@ -68,13 +68,13 @@ function renderBarScene() {
         `;
         document.querySelector('.play-again').style.display = 'block';
 
-        history.push({
+        records.push({
             scene: uiState.scene,
             truth,
             guess,
             time: Date.now(),
         });
-        localStorage.history = JSON.stringify(history)
+        localStorage.history = JSON.stringify(records)
     };
 }
 
