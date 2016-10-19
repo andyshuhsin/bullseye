@@ -1,11 +1,9 @@
 "use strict";
 
-localStorage.history = localStorage.history || "[]";
-
 var uiState = {
     scene: 'bar'
 };
-var history = JSON.parse(localStorage.history);
+var history = JSON.parse(localStorage.history || "[]");
 
 function renderBarScene() {
     var data = [{
