@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 var uiState = {
     scene: 'bar'
 };
-var history = JSON.parse(localStorage.history || "[]");
+var history = JSON.parse(localStorage.get('history') || "[]");
 
 function renderBarScene() {
     var data = [{
@@ -54,7 +54,7 @@ function renderBarScene() {
         var infoDom = document.querySelector(".info");
         var guess = Number(document.querySelector(".guess").value);
         var truth = data[1].value;
-        infoDom.innerHTML = "\n            Your guess: " + guess + " <br />\n            True value: " + truth.toFixed(2) + " <br />\n            You're off by " + ((guess - truth) / truth * 100).toFixed(2) + "%\n        ";
+        infoDom.innerHTML = '\n            Your guess: ' + guess + ' <br />\n            True value: ' + truth.toFixed(2) + ' <br />\n            You\'re off by ' + ((guess - truth) / truth * 100).toFixed(2) + '%\n        ';
         document.querySelector('.play-again').style.display = 'block';
 
         history.push({
@@ -63,7 +63,7 @@ function renderBarScene() {
             guess: guess,
             time: Date.now()
         });
-        localStorage.history = JSON.stringify(history);
+        localStorage.setItem('history', JSON.stringify(history));
     };
 }
 
