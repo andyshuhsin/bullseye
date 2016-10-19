@@ -1,12 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
+    background: #ddd;
+}
+
+.upper-box {
     background: #ccc;
+    padding: 1em;
+    height: 80vh;
 }
 
-.control, .info {
-    width: 200px;
-    margin: 0 auto;
+.graph {
+    height: 100%;
 }
 
-.play-again {
-    margin: 0 auto;
+.lower-box {
+    height: 20vh;
+    padding: 1em;
 }

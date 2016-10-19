@@ -6,13 +6,16 @@ const uiState = {
 const records = JSON.parse(localStorage.history);
 
 function renderBarScene() {
+    const maxMultiple = 5;
+    const minMultiple = 0.5;
+
     const data = [
         {
             value: 1,
             tag: "1",
         },
         {
-            value: 1 + Math.random() * 2,
+            value: minMultiple + Math.random() * (maxMultiple - minMultiple),
             tag: "?"
         },
     ];
@@ -22,21 +25,28 @@ function renderBarScene() {
 
     const graphDom = document.querySelector(".graph");
     const graphDomWidth = graphDom.scrollWidth;
+    const graphDomHeight = graphDom.scrollHeight;
     const barWidth = graphDomWidth / barNumber - barSpacing;
 
-    const graphHeight = 300;
+    const graphHeight = graphDomHeight;
 
     const barChart = d3.select(".graph")
             .append("svg:svg")
             .attr("width", graphDomWidth)
             .attr("height", graphHeight);
 
+    const heightScale = d3.scaleLinear()
+            .domain([0, maxMultiple])
+            .range([0, graphHeight]);
+
     barChart.selectAll("rect")
             .data(data).enter()
             .append("svg:rect")
-            .attr("x", (_, index) => index * (barWidth + barSpacing))
-            .attr("y", datum => graphHeight - datum.value * 100)
-            .attr("height", datum => datum.value * 100)
+            .attr("x", (_, index) =>
+                    barSpacing / 2 + index * (barWidth + barSpacing)
+            )
+            .attr("y", datum => graphHeight - heightScale(datum.value))
+            .attr("height", datum => heightScale(datum.value))
             .attr("width", barWidth)
             .attr("fill", "#888");
 
@@ -44,10 +54,11 @@ function renderBarScene() {
             .data(data).enter()
             .append("svg:text")
             .attr("x", (_, index) => index * (barWidth + barSpacing))
-            .attr("y", datum => graphHeight - datum.value * 100)
+            .attr("y", datum => graphHeight - heightScale(datum.value))
             .text(datum => datum.tag)
             .attr("dx", barWidth/2)
             .attr("dy", "2em")
+            .attr("text-anchor", "middle")
             .attr("fill", "white");
 
     document.querySelector(".guess").onchange = event => {
@@ -66,7 +77,7 @@ function renderBarScene() {
             True value: ${truth.toFixed(2)} <br />
             You're off by ${((guess - truth) / truth * 100).toFixed(2)}%
         `;
-        document.querySelector('.play-again').style.display = 'block';
+        document.querySelector('.play-again').style.display = 'inline-block';
 
         records.push({
             scene: uiState.scene,
@@ -83,7 +94,7 @@ function resetUI() {
     document.querySelector(".info").innerHTML = '';
     document.querySelector('.guess').value = 0;
     document.querySelector('.play-again').style.display = 'none';
-    document.querySelector('.confirm').style.display = 'block';
+    document.querySelector('.confirm').style.display = 'inline-block';
 }
 
 document.querySelector('.play-again').onclick = () => {

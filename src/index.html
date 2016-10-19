@@ -11,23 +11,28 @@
 </head>
 <body>
   <main>
-      <div class="graph"></div>
-      <div class="control">
-          <input class="guess"
-                 type="range"
-                 min="1"
-                 max="5"
-                 step="0.01"
-                 value="0"
-          />
-          <input class="confirm" type="submit" value="confirm" />
+      <div class="upper-box">
+          <div class="graph"></div>
       </div>
-      <div class="info"></div>
-      <input class="play-again"
-             type="submit"
-             value="Play again"
-             style="display: none"
-      />
+      <div class="lower-box">
+          <div class="control">
+              <input class="guess"
+                     type="range"
+                     min="1"
+                     max="5"
+                     step="0.01"
+                     value="0"
+              />
+              <input class="confirm" type="submit" value="confirm" />
+          </div>
+          <div class="info"></div>
+          <input class="play-again"
+                 type="submit"
+                 value="Play again"
+                 style="display: none"
+          />
+
+      </div>
   </main>
 
   <script src="./vendor/d3.v4.min.js"></script>
