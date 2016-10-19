@@ -3,7 +3,7 @@
 var uiState = {
     scene: 'bar'
 };
-var history = JSON.parse(localStorage.get('history') || "[]");
+var history = JSON.parse(localStorage.getItem('history') || "[]");
 
 function renderBarScene() {
     var data = [{
