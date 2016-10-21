@@ -30,7 +30,7 @@ function renderBarScene() {
 
     const nextTest = minMultiple + Math.random() * (maxMultiple - minMultiple);
     // Users shouldn't be expected to guess to an ultra-high accuracy
-    const nextTestRouded = +nextTest.toFixed(2);
+    const nextTestRounded = +nextTest.toFixed(2);
 
     const data = [
         {
@@ -38,7 +38,7 @@ function renderBarScene() {
             tag: "1",
         },
         {
-            value: nextTestRouded,
+            value: nextTestRounded,
             tag: "?"
         },
     ];
