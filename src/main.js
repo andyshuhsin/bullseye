@@ -7,17 +7,21 @@ let records = JSON.parse(localStorage.history);
 let score = +localStorage.sd;
 
 function sd(records) {
-    if (records.length === 0) {
-        return 1;
-    }
     return records
             .map(record => Math.pow(record.truth - record.guess, 2))
             .reduce((a, b) => a + b, 0)
             / records.length;
 }
 
+// Map [0, +infinity) to [0, 100) inversely
 function getScore(records) {
-    return (1 - sd(records)) * 100;
+    const DEFAULT_SCORE = 0;
+    const MAGIC_PARAMETER = 10;
+    if (!records.length) {
+        return DEFAULT_SCORE;
+    }
+    const x = sd(records);
+    return (1 - (x / (x + MAGIC_PARAMETER))) * 100;
 }
 
 function renderBarScene() {
