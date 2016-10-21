@@ -4,6 +4,21 @@ const uiState = {
     scene: 'bar'
 };
 const records = JSON.parse(localStorage.history);
+let score = +localStorage.sd;
+
+function sd(records) {
+    if (records.length === 0) {
+        return 1;
+    }
+    return records
+            .map(record => Math.pow(record.truth - record.guess, 2))
+            .reduce((a, b) => a + b, 0)
+            / records.length;
+}
+
+function getScore(records) {
+    return (1 - sd(records)) * 100;
+}
 
 function renderBarScene() {
     const maxMultiple = 5;
@@ -81,6 +96,7 @@ function renderBarScene() {
             You're off by ${((guess - truth) / truth * 100).toFixed(2)}%
         `;
         document.querySelector('.play-again').style.display = 'inline-block';
+        refreshScore();
 
         records.push({
             scene: uiState.scene,
@@ -92,13 +108,19 @@ function renderBarScene() {
     };
 }
 
+function refreshScore() {
+    score = getScore(records).toFixed(2);
+    document.querySelector('.score').innerText = String(score);
+}
+
 function resetUI() {
     document.querySelector('.graph').innerHTML = '';
     document.querySelector(".info").innerHTML = '';
-    document.querySelector('.guess').value = 0;
+    document.querySelector('.guess').value = 1;
     document.querySelector('.guess').disabled = false;
     document.querySelector('.play-again').style.display = 'none';
     document.querySelector('.confirm').disabled = false;
+    refreshScore();
 }
 
 document.querySelector('.play-again').onclick = () => {
@@ -108,5 +130,6 @@ document.querySelector('.play-again').onclick = () => {
     }
 };
 
+resetUI();
 renderBarScene();
 

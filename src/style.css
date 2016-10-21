@@ -7,6 +7,7 @@ body {
 }
 
 .upper-box {
+    position: relative;
     background: #ccc;
     padding: 1em;
     height: 80vh;
@@ -19,6 +20,16 @@ body {
 .lower-box {
     height: 20vh;
     padding: 1em;
+}
+
+.score-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.score {
+    font-weight: bolder;
 }
 
 .control {
