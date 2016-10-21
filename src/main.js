@@ -53,7 +53,9 @@ function renderBarScene() {
     barChart.selectAll("text")
             .data(data).enter()
             .append("svg:text")
-            .attr("x", (_, index) => index * (barWidth + barSpacing))
+            .attr("x", (_, index) =>
+                    barSpacing / 2 + index * (barWidth + barSpacing)
+            )
             .attr("y", datum => graphHeight - heightScale(datum.value))
             .text(datum => datum.tag)
             .attr("dx", barWidth/2)
