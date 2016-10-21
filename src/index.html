@@ -20,21 +20,39 @@
           </div>
       </div>
       <div class="lower-box">
-          <div class="control">
-              <input class="guess"
-                     type="range"
-                     min="0"
-                     max="5"
-                     step="0.01"
+          <div class="normal-control">
+              <div class="control">
+                  <input class="guess"
+                         type="range"
+                         min="0"
+                         max="5"
+                         step="0.01"
+                  />
+                  <input class="confirm" type="submit" value="confirm" />
+              </div>
+              <div class="info"></div>
+              <input class="play-again"
+                     type="submit"
+                     value="Play again"
+                     style="display: none"
               />
-              <input class="confirm" type="submit" value="confirm" />
+              <input class="view-history"
+                     type="submit"
+                     value="View history"
+                     style="display: none"
+              />
           </div>
-          <div class="info"></div>
-          <input class="play-again"
-                 type="submit"
-                 value="Play again"
-                 style="display: none"
-          />
+
+          <div class="history-control">
+              <input class="history-control-ok"
+                     type="submit"
+                     value="OK"
+              />
+              <input class="clear-history"
+                     type="submit"
+                     value="Clear History"
+              />
+          </div>
 
       </div>
   </main>
