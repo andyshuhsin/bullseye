@@ -63,8 +63,8 @@ function renderBarScene() {
             .attr("text-anchor", "middle")
             .attr("fill", "white");
 
-    document.querySelector(".guess").onchange = event => {
-        data[1].tag = +event.target.value;
+    document.querySelector(".guess").oninput = event => {
+        data[1].tag = (+event.target.value).toFixed(2);
         const text = barChart.selectAll("text").data(data);
         text.merge(text).text(d => d.tag);
     };
