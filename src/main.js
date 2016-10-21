@@ -4,7 +4,7 @@ const uiState = {
     scene: 'bar'
 };
 let records = JSON.parse(localStorage.history);
-let score = +localStorage.sd;
+let score = 0;
 
 function sd(records) {
     return records
