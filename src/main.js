@@ -105,7 +105,6 @@ function renderBarScene() {
         `;
         document.querySelector('.play-again').style.display = 'inline-block';
         document.querySelector('.view-history').style.display = 'inline-block';
-        refreshScore();
 
         records.push({
             scene: uiState.scene,
@@ -113,7 +112,8 @@ function renderBarScene() {
             guess,
             time: Date.now(),
         });
-        localStorage.history = JSON.stringify(records)
+        localStorage.history = JSON.stringify(records);
+        refreshScore();
     };
 }
 
