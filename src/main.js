@@ -143,7 +143,7 @@ function renderHistoryScene() {
             .append('circle')
             .attr("r", 3.5)
             .attr("cx", datum => xScale(datum.guess))
-            .attr("cy", datum => graphDomHeight - yScale(datum.truth))
+            .attr("cy", datum => graphDomHeight - yScale(datum.truth));
 
     historyChart.append("line")
             .style("stroke", "black")
