@@ -24,13 +24,17 @@ function renderBarScene() {
     const maxMultiple = 5;
     const minMultiple = 0.5;
 
+    const nextTest = minMultiple + Math.random() * (maxMultiple - minMultiple);
+    // Users shouldn't be expected to guess to an ultra-high accuracy
+    const nextTestRouded = +nextTest.toFixed(2);
+
     const data = [
         {
             value: 1,
             tag: "1",
         },
         {
-            value: minMultiple + Math.random() * (maxMultiple - minMultiple),
+            value: nextTestRouded,
             tag: "?"
         },
     ];
