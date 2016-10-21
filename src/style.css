@@ -20,3 +20,15 @@ body {
     height: 20vh;
     padding: 1em;
 }
+
+.control {
+    display: flex;
+}
+
+.guess {
+    flex: 1;
+    margin-right: 0.5em;
+}
+
+.confirm {
+}

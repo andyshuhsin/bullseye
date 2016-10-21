@@ -68,7 +68,8 @@ function renderBarScene() {
     };
 
     document.querySelector(".confirm").onclick = () => {
-        document.querySelector(".confirm").style.display = "none";
+        document.querySelector(".confirm").disabled = true;
+        document.querySelector(".guess").disabled = true;
         const infoDom = document.querySelector(".info");
         const guess = Number(document.querySelector(".guess").value);
         const truth = data[1].value;
@@ -93,8 +94,9 @@ function resetUI() {
     document.querySelector('.graph').innerHTML = '';
     document.querySelector(".info").innerHTML = '';
     document.querySelector('.guess').value = 0;
+    document.querySelector('.guess').disabled = false;
     document.querySelector('.play-again').style.display = 'none';
-    document.querySelector('.confirm').style.display = 'inline-block';
+    document.querySelector('.confirm').disabled = false;
 }
 
 document.querySelector('.play-again').onclick = () => {
